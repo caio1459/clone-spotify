@@ -9,10 +9,11 @@ import { SpotifyServiceService } from 'src/app/services/spotify.service';
 export class LoginComponent implements OnInit {
   constructor(private spotifyService: SpotifyServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.spotifyService.verificarTokenUrl();
+  }
 
   abrirLogin() {
     window.location.href = this.spotifyService.obterUrlLogin();
-    alert('Clicou');
   }
 }
