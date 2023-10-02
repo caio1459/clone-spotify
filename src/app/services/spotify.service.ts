@@ -1,31 +1,58 @@
 import { SpotifyConfiguration } from './../../environments/environment';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import Spotify from 'spotify-web-api-js';
+import { IUsuario } from '../Interfaces/IUsuario';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyServiceService {
-  private spotifyApi: Spotify.SpotifyWebApiJs = null;
+  spotifyApi: Spotify.SpotifyWebApiJs = null;
+  usuario: IUsuario;
 
-  constructor() {
+  constructor(private router: Router) {
     this.spotifyApi = new Spotify();
   }
 
+  async iniciarUser() {
+    if (!!this.usuario) {
+      return true;
+    }
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      return false;
+    }
+    try {
+      this.definirTokenAcesso(token);
+      await this.obterUser();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async obterUser() {
+    const userInfo = await this.spotifyApi.getMe();
+  }
+
   //Gera uma url de login
-  obterUrlLogin() {
-    const authEndpoint = `${SpotifyConfiguration.authoEndpoint}?`;
-    const clientId = `client_id=${SpotifyConfiguration.clientId}&`;
-    const redirectUrl = `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
-    const scopes = `scope=${SpotifyConfiguration.scopes.join('%20')}&`;
-    const responseType = `response_type=token&show_dialog=true`;
+  obterUrlLogin(): string {
+    const authEndpoint: string = `${SpotifyConfiguration.authoEndpoint}?`;
+    const clientId: string = `client_id=${SpotifyConfiguration.clientId}&`;
+    const redirectUrl: string = `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
+    const scopes: string = `scope=${SpotifyConfiguration.scopes.join('%20')}&`;
+    const responseType: string = `response_type=token&show_dialog=true`;
     return authEndpoint + clientId + redirectUrl + scopes + responseType;
   }
 
-  verificarTokenUrl() {
+  verificarToken(): any {
     const token = this.obterTokenUrl();
     if (!!token) {
       this.definirTokenAcesso(token);
+      this.router.navigate(['/player']);
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
@@ -33,20 +60,18 @@ export class SpotifyServiceService {
     // Verifica se há dados após a '#' na URL
     if (window.location.hash) {
       // Divide a parte da URL após a '#' em parâmetros separados por '&'
-      const params = window.location.hash.substring(1).split('&');
+      const params: string[] = window.location.hash.substring(1).split('&');
       // Extrai o valor do primeiro parâmetro após o caractere '='
-      console.log(params[0].split('=')[1])
       return params[0].split('=')[1];
     }
     // Retorna uma string vazia se não houver dados após a '#'
     return '';
   }
 
-  definirTokenAcesso(token: string) {
+  definirTokenAcesso(token: string): void {
     this.spotifyApi.setAccessToken(token);
     // Salva o token
     localStorage.setItem('token', token);
-    //Vai para a proxima musica
-    this.spotifyApi.skipToNext();
+    //this.spotifyApi.skipToNext(); -> Vai para a proxima musica
   }
 }
