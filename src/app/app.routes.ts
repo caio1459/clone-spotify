@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const AppRoutes: Routes = [
   {
     path: '', //Quando for vazio
-    redirectTo: 'login', //redireciona para a pagina de login
+    redirectTo: 'player', //redireciona para a pagina de player, se não tiver o token vai para login
     pathMatch: 'full', //Verifica se o nome da rota é igual
   },
   {

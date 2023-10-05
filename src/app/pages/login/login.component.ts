@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyServiceService } from 'src/app/services/spotify.service';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +7,7 @@ import { SpotifyServiceService } from 'src/app/services/spotify.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private spotifyService: SpotifyServiceService) {}
+  constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit(): void {
     this.spotifyService.verificarToken();
