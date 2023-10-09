@@ -1,6 +1,5 @@
 import { SpotifyConfiguration } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import Spotify from 'spotify-web-api-js';
 
 @Injectable({
@@ -8,11 +7,10 @@ import Spotify from 'spotify-web-api-js';
 })
 export class SpotifyService {
   spotifyApi: Spotify.SpotifyWebApiJs = null;
-  
-  constructor(private router: Router) {
+
+  constructor() {
     this.spotifyApi = new Spotify();
   }
-
 
   //Gera uma url de login
   obterUrlLogin(): string {
@@ -23,17 +21,7 @@ export class SpotifyService {
     const responseType: string = `response_type=token&show_dialog=true`;
     return authEndpoint + clientId + redirectUrl + scopes + responseType;
   }
-
-  verificarToken(): any {
-    const token = this.obterTokenUrl();
-    if (!!token) {
-      this.definirTokenAcesso(token);
-      this.router.navigate(['/player']);
-    } else {
-      this.router.navigate(['/login']);
-    }
-  }
-
+  
   obterTokenUrl(): string {
     // Verifica se há dados após a '#' na URL
     if (window.location.hash) {

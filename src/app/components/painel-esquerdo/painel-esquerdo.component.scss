@@ -1,0 +1,49 @@
+@import "variaveis";
+
+:host {
+  max-width: 300px;
+  min-height: 100vh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: $branco;
+  box-shadow: 1px 1px 15px #00000012;
+
+  .menus {
+    flex-grow: 1;
+    flex-direction: column;
+    height: 100%;
+    padding: 0px 40px 0px 40px;
+
+    .image-container {
+      min-height: 120px;
+      img {
+        width: 70%;
+      }
+    }
+    .menu-container {
+      width: 100%;
+      &.flex {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      &.options {
+        min-height: 150px;
+        * {
+          margin-bottom: 10px;
+        }
+      }
+      .playlist-titulo {
+        margin: 10px 0px;
+        align-self: flex-start;
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: $preto;
+      }
+    }
+  }
+  .user-info {
+    flex-grow: 1;
+  }
+}
