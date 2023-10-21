@@ -1,6 +1,9 @@
 import { SpotifyConfiguration } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import Spotify from 'spotify-web-api-js';
+import { IPlaylist } from '../Interfaces/IPlaylist';
+import {criarSpotifyPlaylist, criarSpotifyUser} from '../common/spotifyHelper';
+import { IUsuario } from '../Interfaces/IUsuario';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +15,8 @@ export class SpotifyService {
     this.spotifyApi = new Spotify();
   }
 
+  usuario: IUsuario;
+
   //Gera uma url de login
   obterUrlLogin(): string {
     const authEndpoint: string = `${SpotifyConfiguration.authoEndpoint}?`;
@@ -21,7 +26,7 @@ export class SpotifyService {
     const responseType: string = `response_type=token&show_dialog=true`;
     return authEndpoint + clientId + redirectUrl + scopes + responseType;
   }
-  
+
   obterTokenUrl(): string {
     // Verifica se há dados após a '#' na URL
     if (window.location.hash) {
@@ -34,10 +39,49 @@ export class SpotifyService {
     return '';
   }
 
-  definirTokenAcesso(token: any): void {
+  definirTokenAcesso(token: string): void {
     this.spotifyApi.setAccessToken(token);
     // Salva o token
     localStorage.setItem('token', token);
     //this.spotifyApi.skipToNext(); -> Vai para a proxima musica
+  }
+
+  async inicializarUsuario() {
+    if (!!this.usuario) {
+      return true;
+    }
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      this.definirTokenAcesso(token);
+      await this.obterUser();
+      return !!this.usuario;
+    } catch (ex) {
+      return false;
+    }
+  }
+
+  async obterUser(): Promise<void> {
+    //Pega as informações do usuario logado
+    const userInfo = await this.spotifyApi.getMe();
+    this.usuario = criarSpotifyUser(userInfo);
+  }
+
+  async buscarPlaylistUser(offset: number = 0, limit: number = 50): Promise<IPlaylist[]> {
+    try {
+      //pega as informações da playlist do suer
+      const playlist = await this.spotifyApi.getUserPlaylists(
+        this.usuario?.id,
+        { offset, limit }
+      );
+      return playlist.items.map(criarSpotifyPlaylist);
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
   }
 }

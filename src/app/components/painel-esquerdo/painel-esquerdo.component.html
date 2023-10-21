@@ -1,37 +1,38 @@
 <div class="menus flex">
+
   <div class="image-container flex flex-center">
     <img src="assets/images/spotify-logo.png" alt="Logo">
   </div>
 
   <div class="menu-container flex options">
-    <app-button-menu [descricao]="'Home'" [selecionado]="menuSelect ==='Home'" (click)="botaoClick('Home')">
-      <fa-icon [icon]="homeIcon"></fa-icon>
-    </app-button-menu>
-
-    <app-button-menu [descricao]="'Pesquisar'" [selecionado]="menuSelect ==='Pesquisar'"
-      (click)="botaoClick('Pesquisar')">
-      <fa-icon [icon]="pesquisarIcon"></fa-icon>
-    </app-button-menu>
-
-    <app-button-menu [descricao]="'Artistas'" [selecionado]="menuSelect === 'Artistas'"
-      (click)="botaoClick('Artistas')">
-      <fa-icon [icon]="artistaIcon"></fa-icon>
+    <app-button-menu
+      *ngFor="let menu of menus"
+      [descricao]="menu.descricao"
+      [selecionado]="menuSelect === menu.descricao"
+      (click)="botaoClick(menu.descricao)"
+    >
+      <fa-icon
+        [icon]="menu.icone">
+      </fa-icon>
     </app-button-menu>
   </div>
 
   <div class="menu-container flex">
     <span class="playlist-titulo">
-      Playlist
+      Playlists
     </span>
-
     <div class="playlist-scroll">
-      <app-button-menu [descricao]="'Teste'" [selecionado]="menuSelect ==='Teste'"
-      (click)="botaoClick('Teste')">
+      <app-button-menu
+        *ngFor="let plalist of playlists"
+        [descricao]="plalist.nome"
+        [selecionado]="menuSelect === plalist.id"
+        (click)="botaoClick(plalist.id)"
+      >
         <fa-icon [icon]="playIcon"></fa-icon>
       </app-button-menu>
     </div>
-
   </div>
+
 </div>
 
 <div class="user-info">

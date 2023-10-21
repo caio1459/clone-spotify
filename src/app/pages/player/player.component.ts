@@ -13,8 +13,8 @@ export class PlayerComponent implements OnInit {
   token = localStorage.getItem('token')
 
   ngOnInit(): void {
-    if (!this.token) {
-      this.router.navigate(['/login'])
-    }
+    // if (!this.token) {
+    //   this.router.navigate(['/login'])
+    // }
   }
 }

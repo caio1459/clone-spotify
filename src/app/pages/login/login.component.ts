@@ -8,7 +8,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private spotifyService: SpotifyService, private router: Router) { }
+  constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit(): void {
     this.verificarToken();
@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
     if (!!token) {
       this.spotifyService.definirTokenAcesso(token);
       this.router.navigate(['/player']);
-    } else {
-      this.router.navigate(['/login']);
     }
+    // else {
+    //   this.router.navigate(['/login']);
+    // }
   }
 }

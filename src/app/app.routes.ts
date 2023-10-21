@@ -1,4 +1,7 @@
-import { Routes } from '@angular/router';
+import { Router, Routes } from '@angular/router';
+import { SpotifyService } from './services/spotify.service';
+import { inject } from '@angular/core';
+import { autenticacaoUsuario } from './resolver/autenticacao.resolver';
 
 export const AppRoutes: Routes = [
   {
@@ -16,5 +19,8 @@ export const AppRoutes: Routes = [
     path: 'player',
     loadChildren: () =>
       import('./pages/player/player.module').then((m) => m.PlayerModule),
+    resolve: {
+      userLogado: autenticacaoUsuario,
+    },
   },
 ];
