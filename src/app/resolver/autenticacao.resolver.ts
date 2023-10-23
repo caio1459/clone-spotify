@@ -5,8 +5,8 @@ import { inject } from '@angular/core';
 export const autenticacaoUsuario = () =>
   new Promise(async (res, rej) => {
     // Injeção dos serviços necessários
-    const spotifyService = inject(SpotifyService); // Injeção do serviço SpotifyService
-    const router = inject(Router); // Injeção do módulo de roteamento Router
+    const spotifyService = inject(SpotifyService);
+    const router = inject(Router);
 
     // Função para redirecionar para a página de login e rejeitar a promessa
     const naoAuto = () => {

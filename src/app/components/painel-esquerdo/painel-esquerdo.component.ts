@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  faGuitar,
-  faHome,
-  faMusic,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import {faGuitar, faHome, faMusic, faSearch} from '@fortawesome/free-solid-svg-icons';
 import { IPlaylist } from 'src/app/Interfaces/IPlaylist';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -18,30 +14,36 @@ export class PainelEsquerdoComponent implements OnInit {
     this.buscarPlaylists();
   }
 
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   homeIcon = faHome;
   pesquisarIcon = faSearch;
   artistaIcon = faGuitar;
   playIcon = faMusic;
 
-  menuSelect: string = 'Home';
+  menuSelect: string = 'home';
 
-  botaoClick(button: string) {
-    this.menuSelect = button;
+  botaoClick(value: string) {
+    this.menuSelect = value;
+    this.router.navigate([`/player/${value}`]);
+  }
+
+  //Metodo secundario a apenas para o efeito de selecionado
+  botaoClickPlaylist(value: string){
+    this.menuSelect = value
   }
 
   playlists: IPlaylist[] = [];
 
   // Array de objetos com as informações de cada botão do menu
   menus = [
-    { descricao: 'Home', icone: this.homeIcon },
-    { descricao: 'Pesquisar', icone: this.pesquisarIcon },
-    { descricao: 'Artistas', icone: this.artistaIcon },
+    { descricao: 'home', icone: this.homeIcon },
+    { descricao: 'pesquisar', icone: this.pesquisarIcon },
+    { descricao: 'artistas', icone: this.artistaIcon },
   ];
+
 
   async buscarPlaylists() {
     this.playlists = await this.spotifyService.buscarPlaylistUser();
-    console.log(this.playlists);
   }
 }

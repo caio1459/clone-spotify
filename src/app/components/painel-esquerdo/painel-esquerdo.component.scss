@@ -1,6 +1,10 @@
 @import "variaveis";
 
-$m-ente_menus: 10px;
+$h-image_logo: 120px;
+$h-menu_options: 150px;
+$m-entre_menus: 10px;
+$h-footer_user: 70px;
+$h-calc_scroll: calc($h-image_logo + $h-menu_options + $h-footer_user);
 
 :host {
   max-width: 300px;
@@ -18,7 +22,7 @@ $m-ente_menus: 10px;
     padding: 0px 40px 0px 40px;
 
     .image-container {
-      min-height: 120px;
+      min-height: $h-image_logo;
       img {
         width: 70%;
       }
@@ -31,9 +35,9 @@ $m-ente_menus: 10px;
         align-items: center;
       }
       &.options {
-        min-height: 150px;
+        min-height: $h-menu_options;
         * {
-          margin-bottom: $m-ente_menus;
+          margin-bottom: $m-entre_menus;
         }
       }
       .playlist-titulo {
@@ -46,18 +50,23 @@ $m-ente_menus: 10px;
       }
       .playlist-scroll {
         width: 100%;
-        max-height: 50vh;
+        max-height: calc(95vh - $h-calc_scroll);
         overflow-y: auto;
         &::-webkit-scrollbar {
           display: none;
         }
         * {
-          margin-bottom: $m-ente_menus;
+          margin-bottom: $m-entre_menus;
         }
       }
     }
   }
   .user-info {
-    flex-grow: 1;
+    flex-grow: 0;
+    display: block;
+    bottom: 0;
+    align-self: flex-end;
+    height: $h-footer_user;
+    width: 100%;
   }
 }

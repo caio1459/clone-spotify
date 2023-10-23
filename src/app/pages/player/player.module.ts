@@ -7,17 +7,24 @@ import { PlayerRoter } from './player.routes';
 import { PainelEsquerdoComponent } from 'src/app/components/painel-esquerdo/painel-esquerdo.component';
 import { ButtonMenuComponent } from 'src/app/components/button-menu/button-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-
+import { RodapeUserComponent } from 'src/app/components/rodape-user/rodape-user.component';
+import { HomeComponent } from '../home/home.component';
+import { CardTopArtistaComponent } from 'src/app/components/card-top-artista/card-top-artista.component';
 
 @NgModule({
   declarations: [
-    PlayerComponent, PainelEsquerdoComponent, PainelDireitoComponent, ButtonMenuComponent
+    PlayerComponent,
+    PainelEsquerdoComponent,
+    PainelDireitoComponent,
+    ButtonMenuComponent,
+    RodapeUserComponent,
+    HomeComponent,
+    CardTopArtistaComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(PlayerRoter),
     FontAwesomeModule,
-  ]
+  ],
 })
-export class PlayerModule { }
+export class PlayerModule {}

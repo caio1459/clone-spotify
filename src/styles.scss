@@ -20,3 +20,38 @@ body {
     align-items: center;
   }
 }
+
+.titulo {
+  color: $cor-primaria;
+  display: block;
+  font-weight: 700;
+  &-bg {
+    @extend .titulo; //Copia os dados do pai para o filho
+    font-size: 2.2rem;
+  }
+  &-md {
+    @extend .titulo;
+    font-size: 1.4rem;
+  }
+}
+
+.mt {
+  //faz um loop para pegar as posições de medidas em VH
+  @for $i from 1 to 11 {
+    &-#{$i} {
+      margin-top: #{$i}vh;
+    }
+  }
+}
+
+.card{
+  
+}
+
+.pd {
+  @for $i from 1 to 51 {
+    &-#{$i} {
+      padding: #{$i}px;
+    }
+  }
+}
