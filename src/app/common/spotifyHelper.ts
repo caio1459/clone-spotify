@@ -1,5 +1,6 @@
 //Arquivo responsavel para mapear os objetos do spotify para um objeto do proprio projeto
 
+import { IArtista } from "../Interfaces/IArtista"
 import { IPlaylist } from "../Interfaces/IPlaylist"
 import { IUsuario } from "../Interfaces/IUsuario"
 
@@ -17,5 +18,13 @@ export function criarSpotifyPlaylist(playlist: SpotifyApi.PlaylistObjectSimplifi
     id: playlist.id,
     nome: playlist.name,
     imagemUlr: playlist.images.pop().url
+  }
+}
+
+export function criarTopArtista(artista: SpotifyApi.ArtistObjectFull): IArtista {
+  return {
+    id: artista.id,
+    nome: artista.name,
+    image: artista.images.sort((a, b) => a.width - b.width).pop().url
   }
 }
