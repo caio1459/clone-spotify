@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeUserComponent } from 'src/app/components/rodape-user/rodape-user.component';
 import { HomeComponent } from '../home/home.component';
 import { CardTopArtistaComponent } from 'src/app/components/card-top-artista/card-top-artista.component';
+import { TableComponent } from 'src/app/components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CardTopArtistaComponent } from 'src/app/components/card-top-artista/car
     RodapeUserComponent,
     HomeComponent,
     CardTopArtistaComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,

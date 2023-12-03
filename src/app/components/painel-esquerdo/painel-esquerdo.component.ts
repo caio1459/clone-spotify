@@ -10,7 +10,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./painel-esquerdo.component.scss'],
 })
 export class PainelEsquerdoComponent implements OnInit {
-  
+
   ngOnInit(): void {
     this.buscarPlaylists();
   }
