@@ -4,6 +4,7 @@ import { IArtista } from "../Interfaces/IArtista"
 import { IMusica } from "../Interfaces/IMusica"
 import { IPlaylist } from "../Interfaces/IPlaylist"
 import { IUsuario } from "../Interfaces/IUsuario"
+import { newMusica } from "./factory"
 
 
 export function criarSpotifyUser(user: SpotifyApi.CurrentUsersProfileResponse): IUsuario {
@@ -31,6 +32,10 @@ export function criarTopArtista(artista: SpotifyApi.ArtistObjectFull): IArtista 
 }
 
 export function criarMusicasPlayList(musicas: SpotifyApi.TrackObjectFull): IMusica {
+
+  if (!musicas) {
+    return newMusica()
+  }
 
   const mlSegundosParaMinutos = (ms: number) => {
     const data = addMilliseconds(new Date(0), ms)
