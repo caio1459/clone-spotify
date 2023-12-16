@@ -1,0 +1,6 @@
+<input type="text" [(ngModel)]="campoPesquisa" placeholder="Digite uma Musica" (keyup.enter)="salvarPesquisa()">
+<div class="sugestoes flex">
+  <span *ngFor="let pesquisa of pesquisasRecentes" (click)="definirPesquisa(pesquisa)">
+    {{pesquisa}}
+  </span>
+</div>

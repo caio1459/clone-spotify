@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   playerIcon = faPlay
-
   musicas: IMusica[] = []
   musicaAtual: IMusica = newMusica()
   subs: Subscription[] = []

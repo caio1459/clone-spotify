@@ -10,6 +10,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeUserComponent } from 'src/app/components/rodape-user/rodape-user.component';
 import { HomeComponent } from '../home/home.component';
 import { CardTopArtistaComponent } from 'src/app/components/card-top-artista/card-top-artista.component';
+import { BuscasRecentesComponent } from 'src/app/components/buscas-recentes/buscas-recentes.component';
+import { FormsModule } from '@angular/forms';
+import { TopArtistasComponent } from 'src/app/components/top-artistas/top-artistas.component';
+import { ArtistaItemComponent } from 'src/app/components/artista-item/artista-item.component';
+import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +25,16 @@ import { CardTopArtistaComponent } from 'src/app/components/card-top-artista/car
     RodapeUserComponent,
     HomeComponent,
     CardTopArtistaComponent,
+    BuscasRecentesComponent,
+    TopArtistasComponent,
+    ArtistaItemComponent,
+    PlayerCardComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(PlayerRoter),
     FontAwesomeModule,
+    FormsModule
   ],
 })
-export class PlayerModule {}
+export class PlayerModule { }

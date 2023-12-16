@@ -93,7 +93,7 @@ export class SpotifyService {
   }
 
   async getTopArtista(limit: number = 10): Promise<IArtista[]> {
-    const artistas = await this.spotifyApi.getMyTopArtists(limit)
+    const artistas = await this.spotifyApi.getMyTopArtists({limit})
     return artistas.items.map(criarTopArtista)
   }
 
