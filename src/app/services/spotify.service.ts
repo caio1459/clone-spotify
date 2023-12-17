@@ -5,6 +5,7 @@ import { IPlaylist } from '../Interfaces/IPlaylist';
 import {
   criarMusicasPlayList,
   criarSpotifyPlaylist,
+  criarSpotifyPlaylistUnica,
   criarSpotifyUser,
   criarTopArtista
 } from '../common/spotifyHelper';
@@ -92,8 +93,23 @@ export class SpotifyService {
     }
   }
 
+  async buscarMusicasPlaylist(id: string, offset: number = 0, limit: number = 50) {
+    const playlistSpotify = await this.spotifyApi.getPlaylist(id)
+
+    if (!playlistSpotify)
+      return null
+
+    const playlist = criarSpotifyPlaylistUnica(playlistSpotify)
+    const musicas = await this.spotifyApi.getPlaylistTracks(id, { offset, limit })
+    
+    playlist.musicas = musicas.items.map(musica =>
+      criarMusicasPlayList(musica.track as SpotifyApi.TrackObjectFull)
+    )
+    return playlist
+  }
+
   async getTopArtista(limit: number = 10): Promise<IArtista[]> {
-    const artistas = await this.spotifyApi.getMyTopArtists({limit})
+    const artistas = await this.spotifyApi.getMyTopArtists({ limit })
     return artistas.items.map(criarTopArtista)
   }
 

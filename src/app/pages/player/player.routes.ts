@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { PlayerComponent } from './player.component';
 import { HomeComponent } from '../home/home.component';
+import { ListaComponent } from '../lista/lista.component';
 
 export const PlayerRoter: Routes = [
   {
@@ -12,6 +13,10 @@ export const PlayerRoter: Routes = [
         path: 'home',
         component: HomeComponent,
       },
+      {
+        path: 'lista/:tipo/:id',
+        component: ListaComponent
+      }
     ],
   },
 ];

@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { TopArtistasComponent } from 'src/app/components/top-artistas/top-artistas.component';
 import { ArtistaItemComponent } from 'src/app/components/artista-item/artista-item.component';
 import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
+import { ListaComponent } from '../lista/lista.component';
+import { BannerComponent } from 'src/app/components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { PlayerCardComponent } from 'src/app/components/player-card/player-card.
     BuscasRecentesComponent,
     TopArtistasComponent,
     ArtistaItemComponent,
-    PlayerCardComponent
+    PlayerCardComponent,
+    ListaComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,

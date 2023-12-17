@@ -4,7 +4,7 @@ import { IArtista } from "../Interfaces/IArtista"
 import { IMusica } from "../Interfaces/IMusica"
 import { IPlaylist } from "../Interfaces/IPlaylist"
 import { IUsuario } from "../Interfaces/IUsuario"
-import { newMusica } from "./factory"
+import { newMusica, newPlaylist } from "./factory"
 
 
 export function criarSpotifyUser(user: SpotifyApi.CurrentUsersProfileResponse): IUsuario {
@@ -20,6 +20,18 @@ export function criarSpotifyPlaylist(playlist: SpotifyApi.PlaylistObjectSimplifi
     id: playlist.id,
     nome: playlist.name,
     imagemUlr: playlist.images.pop().url
+  }
+}
+
+export function criarSpotifyPlaylistUnica(playlist: SpotifyApi.SinglePlaylistResponse): IPlaylist {
+  if (!playlist)
+    return newPlaylist()
+
+  return {
+    id: playlist.id,
+    nome: playlist.name,
+    imagemUlr: playlist.images.shift().url,
+    musicas: []
   }
 }
 

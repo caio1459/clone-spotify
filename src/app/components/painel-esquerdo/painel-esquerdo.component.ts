@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {faGuitar, faHome, faMusic, faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faGuitar, faHome, faMusic, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IPlaylist } from 'src/app/Interfaces/IPlaylist';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -15,7 +15,7 @@ export class PainelEsquerdoComponent implements OnInit {
     this.buscarPlaylists();
   }
 
-  constructor(private spotifyService: SpotifyService, private router: Router) {}
+  constructor(private spotifyService: SpotifyService, private router: Router) { }
 
   homeIcon = faHome;
   pesquisarIcon = faSearch;
@@ -29,10 +29,10 @@ export class PainelEsquerdoComponent implements OnInit {
     this.router.navigate([`/player/${value}`]);
   }
 
-  //Metodo secundario a apenas para o efeito de selecionado
-  botaoClickPlaylist(value: string){
-    this.menuSelect = value
-  }
+  // //Metodo secundario a apenas para o efeito de selecionado
+  // botaoClickPlaylist(value: string) {
+  //   this.menuSelect = value
+  // }
 
   playlists: IPlaylist[] = [];
 
@@ -43,8 +43,12 @@ export class PainelEsquerdoComponent implements OnInit {
     { descricao: 'artistas', icone: this.artistaIcon },
   ];
 
-
   async buscarPlaylists() {
     this.playlists = await this.spotifyService.buscarPlaylistUser();
+  }
+
+  irParaPlaylist(id: string) {
+    this.menuSelect = id
+    this.router.navigateByUrl(`/player/lista/playlist/${id}`)
   }
 }

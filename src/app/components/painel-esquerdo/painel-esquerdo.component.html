@@ -1,18 +1,15 @@
 <div class="menus flex">
 
   <div class="image-container flex flex-center">
-    <img src="assets/images/spotify-logo.png" alt="Logo">
+    <a routerLink='/player/home'>
+      <img src="assets/images/spotify-logo.png" alt="Logo">
+    </a>
   </div>
 
   <div class="menu-container flex options">
-    <app-button-menu
-      *ngFor="let menu of menus"
-      [descricao]="menu.descricao"
-      [selecionado]="menuSelect === menu.descricao"
-      (click)="botaoClick(menu.descricao)"
-    >
-      <fa-icon
-        [icon]="menu.icone">
+    <app-button-menu *ngFor="let menu of menus" [descricao]="menu.descricao"
+      [selecionado]="menuSelect === menu.descricao" (click)="botaoClick(menu.descricao)">
+      <fa-icon [icon]="menu.icone">
       </fa-icon>
     </app-button-menu>
   </div>
@@ -22,12 +19,8 @@
       Playlists
     </span>
     <div class="playlist-scroll">
-      <app-button-menu
-        *ngFor="let plalist of playlists"
-        [descricao]="plalist.nome"
-        [selecionado]="menuSelect === plalist.id"
-        (click)="botaoClickPlaylist(plalist.id)"
-      >
+      <app-button-menu *ngFor="let playlist of playlists" [descricao]="playlist.nome"
+        [selecionado]="menuSelect === playlist.id" (click)="irParaPlaylist(playlist.id)">
         <fa-icon [icon]="playIcon"></fa-icon>
       </app-button-menu>
     </div>
